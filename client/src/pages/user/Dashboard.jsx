@@ -4,7 +4,7 @@ import Layout from "../../components/Layout/Layout";
 function Dashboard() {
   return (
     <div>
-      Dashboard page
+      <h1>Normal dashboard</h1>
     </div>
   );
 }

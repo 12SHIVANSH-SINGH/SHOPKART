@@ -12,7 +12,7 @@ function Spinner() {
 
     // when count reaches 0, redirect
     if (count === 0) {
-      navigate("/signin");
+      navigate("/dashboard");
     }
 
     // Cleanup function to clear interval

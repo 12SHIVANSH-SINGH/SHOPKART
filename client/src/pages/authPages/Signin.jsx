@@ -29,8 +29,8 @@ function Signin() {
         
         setAuth(authData);
         localStorage.setItem('auth', JSON.stringify(authData));
-        
-        navigate("/dashboard"); // Redirect to dashboard instead of home
+        navigate("/dashboard");
+          
       } else {
         toast.error(res.data.message);
       }

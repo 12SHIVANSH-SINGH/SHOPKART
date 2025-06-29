@@ -13,6 +13,8 @@ import { ToastContainer } from "react-toastify";
 import Dashboard from "./pages/user/Dashboard.jsx";
 import Private from "./components/Routes/Private.jsx";
 import ForgotPassword from "./pages/authPages/ForgotPassword.jsx";
+import Protected from "./components/Routes/Protected.jsx";
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 function App() {
   return (
     <>
@@ -25,14 +27,16 @@ function App() {
           <Route path="/policy" element={<Policy />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/forgotPassword" element={<ForgotPassword/>} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="*" element={<Pagenotfound />} />
           <Route path="/dashboard" element={<Private />}>
-          <Route index element={<Dashboard />} />
-        </Route>
-        </Route>
+            <Route index element={<Dashboard />} />
+          </Route>
+          <Route path="/admindashboard" element={<Protected />}>
+            <Route index element={<AdminDashboard />} />
+          </Route>
 
-        
+        </Route>
       </Routes>
     </>
   );

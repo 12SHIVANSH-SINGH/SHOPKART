@@ -38,6 +38,7 @@ export const requireSignin = (req, res, next) => {
 
 // Admin access middleware
 export const isAdmin = async (req, res, next) => {
+  console.log(req.user);
   try {
     // 1. First ensure requireSignin has set req.user
     if (!req.user || !req.user._id) {

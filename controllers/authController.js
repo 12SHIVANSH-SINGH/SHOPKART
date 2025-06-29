@@ -65,8 +65,10 @@ export const registerController = async (req, res) => {
 };
 
 export const loginController = async (req, res) => {
+
   try {
     const { email, password } = req.body;
+    console.log(password, email);
     if (!email || !password) {
       return res.status(400).send({
         success: false,
@@ -80,7 +82,8 @@ export const loginController = async (req, res) => {
         message: "email is not registered",
       });
     }
-    const match = comparePassword(password, user.password);
+    
+    const match = await comparePassword(password, user.password);
     if (!match) {
       return res.status(400).send({
         success: false,
@@ -93,7 +96,6 @@ export const loginController = async (req, res) => {
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.TOKEN_EXPIRY,
     });
-
     res.status(200).send({
       success: true,
       message: "LOGIN SUCCESSFULLY",
@@ -101,6 +103,8 @@ export const loginController = async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
+        role : user.role,
+        token : token
       },
       token,
     });

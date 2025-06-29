@@ -30,4 +30,9 @@ router.get("/userAuth", requireSignin, (req, res) => {
 // Forget password
 router.post('/forgotPassword', forgotPasswordController);
 
+// admin route
+router.get("/adminAuth", requireSignin, isAdmin, (req, res) => {
+  return res.status(200).send({ ok: true });
+});
+
 export default router;
