@@ -12,32 +12,45 @@ export default function Private() {
 
   useEffect(() => {
     const authCheck = async () => {
+      // If no token exists, redirect immediately
+      if (!auth?.token) {
+        navigate("/signin");
+        return;
+      }
+
       try {
-        const res = await axios.get("/api/v1/auth/userAuth", {
+        const res = await axios.get(`${import.meta.env.VITE_API}/api/v1/auth/userAuth`, {
           headers: {
-            Authorization: auth?.token,
+            Authorization: `Bearer ${auth.token}`,
           },
         });
+        
         if (res.data?.ok) {
           setOk(true);
         } else {
-          setOk(false);
-          navigate("/signin"); // ⛔ force logout if token bad
+          // Handle invalid response
+          console.error("Invalid auth response:", res.data);
+          navigate("/signin");
         }
       } catch (err) {
-        console.log("Auth check failed:", err);
-        setOk(false);
+        // Handle specific error cases
+        console.error("Auth check failed:", err);
+        
+        if (err.response?.status === 401) {
+          console.log("Token is invalid or expired");
+        } else {
+          console.log("Network or server error");
+        }
+        
         navigate("/signin");
       } finally {
         setLoading(false);
       }
     };
 
-    if (auth?.token) {
-      authCheck();
-    } else {
-      navigate("/signin");
-    }
+    // Add a small delay to prevent rapid fire requests
+    const timer = setTimeout(authCheck, 100);
+    return () => clearTimeout(timer);
   }, [auth?.token, navigate]);
 
   if (loading) return <Spinner />;

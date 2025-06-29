@@ -9,6 +9,7 @@ function Signup() {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
+  const [answer, setAnswer] = useState("");
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -16,7 +17,7 @@ function Signup() {
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_API}/api/v1/auth/register`,
-        { name, email, password : pass, phone, address }
+        { name, email, password : pass, phone, address, answer }
       );
       if (res.data.success) {
         toast.success(res.data.message);
@@ -90,6 +91,17 @@ function Signup() {
               id="address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Your favorate number"
+              id="answer"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
               required
             />
           </div>

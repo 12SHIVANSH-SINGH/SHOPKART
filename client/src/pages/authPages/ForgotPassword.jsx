@@ -2,35 +2,28 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { useAuth } from "../../contexts/Auth.jsx";
 
-function Signin() {
+
+function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+  const [newPassword, setPass] = useState("");
   const navigate = useNavigate();
-  const [auth, setAuth] = useAuth();
+  const [answer, setAnswer] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API}/api/v1/auth/login`,
-        { email, password: pass }
+        `${import.meta.env.VITE_API}/api/v1/auth/forgotPassword`,
+        { email, newPassword, answer }
       );
-      
+      console.log(res.data);
       if (res.data.success) {
         toast.success(res.data.message);
-        
+
         // Create auth object with user and token
-        const authData = {
-          user: res.data.user,
-          token: res.data.token
-        };
-        
-        setAuth(authData);
-        localStorage.setItem('auth', JSON.stringify(authData));
-        
-        navigate("/dashboard"); // Redirect to dashboard instead of home
+
+        navigate("/signin"); // Redirect to dashboard instead of home
       } else {
         toast.error(res.data.message);
       }
@@ -46,7 +39,7 @@ function Signin() {
         className="card shadow p-4"
         style={{ width: "100%", maxWidth: "400px", borderRadius: "1rem" }}
       >
-        <h2 className="text-center mb-4 text-primary fw-bold">Sign In</h2>
+        <h2 className="text-center mb-4 text-primary fw-bold">Forgot Password</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <input
@@ -61,27 +54,35 @@ function Signin() {
           </div>
           <div className="mb-3">
             <input
+              type="text"
+              className="form-control"
+              placeholder="Enter Your Favourite Number"
+              id="answer"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
               type="password"
               className="form-control"
-              placeholder="Password"
-              id="password"
-              value={pass}
+              placeholder="New Password"
+              id="newPassword"
+              value={newPassword}
               onChange={(e) => setPass(e.target.value)}
               required
             />
           </div>
 
           <button type="submit" className="btn btn-primary w-100">
-            Log In
+            Change Password
           </button>
-          <button type="submit" className="btn w-100" onClick={() => navigate('/forgotPassword')}>
-            Forgot Password ?
-          </button>
+
         </form>
       </div>
-      <ToastContainer />
     </div>
   );
 }
 
-export default Signin;
+export default ForgotPassword;

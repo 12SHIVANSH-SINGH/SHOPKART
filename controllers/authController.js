@@ -5,7 +5,7 @@ export const registerController = async (req, res) => {
   try {
     // destructure and get the required data
 
-    const { name, email, password, phone, address } = req.body;
+    const { name, email, password, phone, address ,answer} = req.body;
     // validation
     if (!name) {
       return res.send({ message: "name is required" });
@@ -21,6 +21,9 @@ export const registerController = async (req, res) => {
     }
     if (!address) {
       return res.send({ message: "address is required" });
+    }
+    if (!answer) {
+      return res.send({ message: "answer is required" });
     }
 
     // existing user validation
@@ -44,6 +47,7 @@ export const registerController = async (req, res) => {
       address,
       phone,
       password: hashedPassword,
+      answer
     }).save();
     res.status(201).send({
       success: true,
@@ -104,6 +108,45 @@ export const loginController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "error in login",
+      error,
+    });
+  }
+};
+
+export const forgotPasswordController = async (req,res) => {
+  try {
+    const { email, answer, newPassword } = req.body;
+    if (!email || !answer || !newPassword) {
+      return res.status(400).send({ message: "Incomplete credentials" });
+    }
+
+    const user = await User.findOne({ email, answer });
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+    const hashed = await hashPassword(newPassword);
+    const response = await User.findByIdAndUpdate(user._id, {
+      password: hashed,
+    });
+    if (response) {
+      return res.status(200).send({
+        success: true,
+        message: "password changed successfully",
+      });
+    } else {
+      return res.status(400).send({
+        success: true,
+        message: "password did not changed successfully",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Something went wrong",
       error,
     });
   }

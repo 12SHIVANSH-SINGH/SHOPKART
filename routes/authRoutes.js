@@ -3,6 +3,7 @@ import {
   registerController,
   loginController,
   testController,
+  forgotPasswordController,
 } from "../controllers/authController.js";
 import { isAdmin, requireSignin } from "../middlewares/authMiddleware.js";
 // router object
@@ -18,10 +19,15 @@ router.post("/login", loginController);
 
 // protected routes via middleware injection which will make it compulasory to have a token before log in
 router.post("/test", requireSignin, isAdmin, testController);
-export default router;
+
 
 // protected routes
 
 router.get("/userAuth", requireSignin, (req, res) => {
-  res.status(200).send({ ok: true });
+  return res.status(200).send({ ok: true });
 });
+
+// Forget password
+router.post('/forgotPassword', forgotPasswordController);
+
+export default router;
