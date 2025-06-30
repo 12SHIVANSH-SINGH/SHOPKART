@@ -21,7 +21,7 @@ export default function Protected() {
       try {
         const res = await axios.get(`${import.meta.env.VITE_API}/api/v1/auth/adminAuth`, {
           headers: {
-            Authorization: `Bearer ${auth.token}`,
+            Authorization: `${auth.token}`,
           },
         });
         
