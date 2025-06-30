@@ -15,6 +15,10 @@ import Private from "./components/Routes/Private.jsx";
 import ForgotPassword from "./pages/authPages/ForgotPassword.jsx";
 import Protected from "./components/Routes/Protected.jsx";
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import Orders from "./pages/user/Orders.jsx";
+import Profile from "./pages/user/Profile.jsx";
+import AdminOrders from "./pages/admin/AdminOrders.jsx";
+import AdminUsers from "./pages/admin/AdminUsers.jsx";
 function App() {
   return (
     <>
@@ -31,9 +35,13 @@ function App() {
           <Route path="*" element={<Pagenotfound />} />
           <Route path="/dashboard" element={<Private />}>
             <Route index element={<Dashboard />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="profile" element={<Profile />} />
           </Route>
           <Route path="/admindashboard" element={<Protected />}>
             <Route index element={<AdminDashboard />} />
+            <Route path="orders" element={<AdminOrders />} />
+            <Route path="users" element={<AdminUsers />} />
           </Route>
 
         </Route>

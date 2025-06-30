@@ -2,7 +2,7 @@ import React from "react";
 import UserMenu from "../../components/Layout/UserMenu.jsx";
 import { useAuth } from "../../contexts/Auth.jsx";
 
-function Dashboard() {
+function Orders() {
   const [auth] = useAuth();
 
   return (
@@ -17,11 +17,10 @@ function Dashboard() {
         <main className="col-12 col-md-9 p-4">
           <div className="card shadow-sm">
             <div className="card-body">
-              <h2 className="card-title">Welcome, {auth?.user?.name} 👋</h2>
-
-
-              {/* Info row */}
-              
+              <h2 className="card-title">Orders 👋</h2>
+              <p className="card-text text-muted">
+                Here’s your ShopKart account orders.
+              </p>
             </div>
           </div>
         </main>
@@ -30,4 +29,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Orders;

@@ -1,9 +1,8 @@
 import React from "react";
 import UserMenu from "../../components/Layout/UserMenu.jsx";
 import { useAuth } from "../../contexts/Auth.jsx";
-import AdminMenu from "../../components/Layout/AdminMenu.jsx";
 
-function AdminDashboard() {
+function Profile() {
   const [auth] = useAuth();
 
   return (
@@ -11,14 +10,17 @@ function AdminDashboard() {
       <div className="row vh-100">
         {/* Left Sidebar */}
         <aside className="col-12 col-md-3 bg-light p-3">
-          <AdminMenu />
+          <UserMenu />
         </aside>
 
         {/* Main Content */}
         <main className="col-12 col-md-9 p-4">
           <div className="card shadow-sm">
             <div className="card-body">
-              <h2 className="card-title">Welcome, {auth?.user?.name} 👋</h2>
+              <h2 className="card-title">Profile 👋</h2>
+              <p className="card-text text-muted">
+                Here’s your ShopKart account overview.
+              </p>
 
               {/* Info row */}
               <div className="row mt-4">
@@ -26,6 +28,18 @@ function AdminDashboard() {
                   <div className="border rounded p-3 h-100">
                     <small className="text-muted">Email</small>
                     <div>{auth?.user?.email || "Not Provided"}</div>
+                  </div>
+                </div>
+                <div className="col-12 col-sm-6 mb-3">
+                  <div className="border rounded p-3 h-100">
+                    <small className="text-muted">Phone</small>
+                    <div>{auth?.user?.phone || "Not Provided"}</div>
+                  </div>
+                </div>
+                <div className="col-12 col-sm-6 mb-3">
+                  <div className="border rounded p-3 h-100">
+                    <small className="text-muted">Address</small>
+                    <div>{auth?.user?.address || "Not Provided"}</div>
                   </div>
                 </div>
                 <div className="col-12 col-sm-6 mb-3">
@@ -43,4 +57,4 @@ function AdminDashboard() {
   );
 }
 
-export default AdminDashboard;
+export default Profile;

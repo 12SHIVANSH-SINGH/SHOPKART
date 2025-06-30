@@ -1,8 +1,9 @@
 import React from "react";
 import UserMenu from "../../components/Layout/UserMenu.jsx";
 import { useAuth } from "../../contexts/Auth.jsx";
+import AdminMenu from "../../components/Layout/AdminMenu.jsx";
 
-function Dashboard() {
+function AdminUsers() {
   const [auth] = useAuth();
 
   return (
@@ -10,7 +11,7 @@ function Dashboard() {
       <div className="row vh-100">
         {/* Left Sidebar */}
         <aside className="col-12 col-md-3 bg-light p-3">
-          <UserMenu />
+          <AdminMenu />
         </aside>
 
         {/* Main Content */}
@@ -19,9 +20,8 @@ function Dashboard() {
             <div className="card-body">
               <h2 className="card-title">Welcome, {auth?.user?.name} 👋</h2>
 
-
               {/* Info row */}
-              
+            
             </div>
           </div>
         </main>
@@ -30,4 +30,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default AdminUsers;
