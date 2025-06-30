@@ -12,7 +12,7 @@ export const requireSignin = (req, res, next) => {
     }
 
     // 2. Extract token from "Bearer <token>" format
-    const token = req.headers.authorization.split(" ")[1];
+    const token = req.headers.authorization;
     
     // 3. Verify token
     const decode = jwt.verify(token, process.env.JWT_SECRET);

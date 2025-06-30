@@ -13,15 +13,15 @@ export default function Private() {
   useEffect(() => {
     const authCheck = async () => {
       // If no token exists, redirect immediately
+     
       if (!auth?.token) {
         navigate("/signin");
         return;
       }
-
       try {
         const res = await axios.get(`${import.meta.env.VITE_API}/api/v1/auth/userAuth`, {
           headers: {
-            Authorization: `Bearer ${auth.token}`,
+            Authorization: `${auth.token}`,
           },
         });
         
