@@ -2,15 +2,15 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const menuItems = [
-  { label: "Users", to: "/admindashboard/users", emoji: "👤" },
-  { label: "Orders", to: "/admindashboard/orders", emoji: "🛒" },
+  { label: "Orders", to: "/adminDashboard/orders", emoji: "🛒" },
+  { label: "Category", to: "/adminDashboard/category", emoji: "👤" },
+  { label: "Products", to: "/adminDashboard/products", emoji: "📦" },
 ];
 
 function AdminMenu() {
   return (
     <div className="card shadow-sm border-0 rounded-4 p-4 bg-white">
       <h4 className="text-center fw-bold mb-4 text-primary d-flex justify-content-center align-items-center gap-2">
-        
         <NavLink
           to="/adminDashboard"
           className="text-decoration-none text-primary ms-2"

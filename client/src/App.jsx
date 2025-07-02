@@ -19,6 +19,8 @@ import Orders from "./pages/user/Orders.jsx";
 import Profile from "./pages/user/Profile.jsx";
 import AdminOrders from "./pages/admin/AdminOrders.jsx";
 import AdminUsers from "./pages/admin/AdminUsers.jsx";
+import AdminCategory from "./pages/admin/AdminCategory.jsx";
+import AdminProducts from "./pages/admin/AdminProducts.jsx";
 function App() {
   return (
     <>
@@ -42,6 +44,8 @@ function App() {
             <Route index element={<AdminDashboard />} />
             <Route path="orders" element={<AdminOrders />} />
             <Route path="users" element={<AdminUsers />} />
+            <Route path="category" element={< AdminCategory/>} />
+            <Route path="products" element={<AdminProducts />} />
           </Route>
 
         </Route>
