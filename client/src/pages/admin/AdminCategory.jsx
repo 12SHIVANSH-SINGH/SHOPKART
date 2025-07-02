@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AdminMenu from "../../components/Layout/AdminMenu.jsx";
-
+import { toast } from "react-toastify";
 function AdminCategory() {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
@@ -40,8 +40,10 @@ function AdminCategory() {
       setName("");
       setEditingId(null);
       fetchCategories();
+      toast.success("Success")
     } catch (error) {
       console.error("Error saving category", error);
+      toast.error("Failure")
     }
   };
 
@@ -58,6 +60,7 @@ function AdminCategory() {
     try {
       await axios.delete(`${import.meta.env.VITE_API}/api/v1/category/delete-category/${id}`);
       fetchCategories();
+      toast.success("Deleted successfully")
     } catch (error) {
       console.error("Error deleting category", error);
     }
