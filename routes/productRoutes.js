@@ -31,7 +31,7 @@ router.route("/update-product").post(
 
 router.route('/all-products').get(getAllProductController)
 router.route('/single-product/:slug').get(getSingleProductController)
-router.route('/delete-product/:slug').delete(deleteProductController)
+router.route('/delete-product/:id').delete(deleteProductController)
 
 
 export default router;

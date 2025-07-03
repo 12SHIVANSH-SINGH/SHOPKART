@@ -40,7 +40,7 @@ export const createProductController = async (req, res) => {
     const newProduct = await Product.create({
       name,
       description,
-      category: cat._id,
+      category: cat.name,
       price,
       image: uploadedimage.url,
       quantity,
@@ -102,7 +102,7 @@ export const updateProductController = async (req, res) => {
       description,
       price,
       quantity,
-      category: cat._id,
+      category: cat.name,
       image: imageUrl,
       slug: slugify(name),
     };
@@ -172,8 +172,8 @@ export const getSingleProductController = async (req, res) => {
 
 export const deleteProductController = async (req, res) =>{
 try {
-    const slug = req.params.slug;
-    const prod = await Product.findOne({ slug });
+    const id = req.params.id;
+    const prod = await Product.findById({ _id : id });
     if (!prod) {
       return res.status(400).send({
         success: false,
